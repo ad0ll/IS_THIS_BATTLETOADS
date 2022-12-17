@@ -3,6 +3,7 @@ pragma solidity ^0.8.13;
 
 import "./DeadMemeSpawner.sol";
 import "./TheLegendNeverDies.sol";
+import "forge-std/console.sol";
 
 contract IsThisBattletoadsQuestionMarkExclamationPoint {
     uint256 public hearts = 100;
@@ -20,12 +21,15 @@ contract IsThisBattletoadsQuestionMarkExclamationPoint {
     }
 
     function eatPunch() external payable {
-        require(msg.value > 0.05 ether, "ARE YOU THREATENING ME?!");
+        require(msg.value >= 0.05 ether, "ARE YOU THREATENING ME?!");
         if (msg.value == 0.06 ether) {
             hell.itSpread();
         }
-        owner.transfer(msg.value);
+        console.log(1234);
+        console.log(msg.value);
+        owner.call{value: msg.value}("");
         hearts -= 1;
+        console.log(hearts);
         if (hearts == 0) {
             blowUpandDie();
         }
